@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MovieserviceService } from './movieservice.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material';
+import { AlertsModule } from 'angular-alert-module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { MaterialModule } from './material';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    AlertsModule.forRoot(),
 
   ],
   providers: [MovieserviceService],

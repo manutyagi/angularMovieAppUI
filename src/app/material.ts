@@ -7,11 +7,14 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatInputModule} from '@angular/material/input';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
+
 
 
 @NgModule({
-imports: [MatButtonModule,MatCheckboxModule,MatToolbarModule,MatIconModule,MatMenuModule,MatCardModule,MatGridListModule,MatInputModule],
-exports: [MatButtonModule,MatCheckboxModule,MatToolbarModule,MatIconModule,MatMenuModule,MatCardModule,MatGridListModule,MatInputModule]
+imports: [MatButtonModule,MatCheckboxModule,MatToolbarModule,MatIconModule,MatMenuModule,MatCardModule,MatGridListModule,MatInputModule,MatTooltipModule],
+exports: [MatButtonModule,MatCheckboxModule,MatToolbarModule,MatIconModule,MatMenuModule,MatCardModule,MatGridListModule,MatInputModule,MatTooltipModule]
 })
 
 export class MaterialModule{} 

@@ -3,7 +3,7 @@ import { Movie } from './movie';
 import { MovieserviceService } from './movieservice.service';
 import { Observable } from 'rxjs';
 import { OmdbMovie } from './omdbmovie';
-
+import { AlertsService } from 'angular-alert-module';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,9 +13,8 @@ export class AppComponent {
   movies;
   omdbMovie;
   omdbSearchTitle = '';
-  constructor(private movieService: MovieserviceService) { }
+  constructor(private movieService: MovieserviceService,private alert:AlertsService) { }
   movieModel = new Movie("", "", "", "","");
-  
 
   ngOnInit(){
     this.defaultLoad();
@@ -27,6 +26,8 @@ export class AppComponent {
     this.movieModel.type=omdbMovie.Type;
     this.movieModel.poster=omdbMovie.Poster;
     this.movieService.saveMovie(this.movieModel).subscribe(res => console.log('Saved'));
+    this.alert.setMessage('Saved..','success');
+
 
   }
 
@@ -47,12 +48,16 @@ export class AppComponent {
   onDelete(movie){
     this.movieService.deleteMovie(movie.id).subscribe(res => console.log('Deleted'))
     window.location.reload(true);
+    this.alert.setMessage('Deleted..','success');
   }
 
   defaultLoad(){
     this.movieService.defaultLoad().subscribe(data => {
       this.omdbMovie = data['Search'];
+      this.movies=null;
   });
 }
+
+
 }
   

@@ -1,29 +1,38 @@
 <!--The content below is only a placeholder and can be replaced.-->
+    
 <mat-toolbar color="primary">
     <mat-toolbar-row>
-        <span>Movie-app</span>
-        <span class="example-spacer" style="margin-left: 250px" >
-                <mat-form-field>
-                        <input matInput value="Search ImDB..." [(ngModel)]="omdbSearchTitle">
-                        <button (click)="onSearch()" mat-raised-button color="accent" style="margin-left: 50px">Search ImDB Movies</button>
-                    </mat-form-field>
+        <span>
+            <mat-card-actions>
+                <button mat-raised-button matTooltip="Trending Movies" matTooltipClass="example-tooltip-red" aria-label="Button that shows a red tooltip"
+                    class="example-button" mat-raised-button (click)="defaultLoad()" color="primary" style="margin-left: 20px;margin-top:15px">Home</button>
+            </mat-card-actions>
         </span>
-        
+        <span class="example-spacer" style="margin-left: 250px">
+            <mat-form-field>
+                <input mat-raised-button matTooltip="Enter the name of the movie you want to search.." matTooltipClass="example-tooltip-red"
+                    aria-label="Button that shows a red tooltip" class="example-button" matInput value="Search ImDB..." [(ngModel)]="omdbSearchTitle">
+                <button mat-raised-button matTooltip="Click to search from ImDb database" matTooltipClass="example-tooltip-red" aria-label="Button that shows a red tooltip"
+                    class="example-button" (click)="onSearch()" mat-raised-button  style="margin-left: 50px">Search ImDB Movies</button>
+            </mat-form-field>
+        </span>
+
         <mat-icon class="example-icon" [matMenuTriggerFor]="menu">menu</mat-icon>
-       
+
         <mat-menu #menu="matMenu">
-            <div (click)="onClick()">
+            <div (click)="onClick()" mat-raised-button matTooltip="Click to see your saved movies.." matTooltipClass="example-tooltip-red"
+                aria-label="Button that shows a red tooltip" class="example-button">
                 <button mat-menu-item>Wishlist</button>
 
             </div>
 
             <button mat-menu-item>Sign Out</button>
         </mat-menu>
-   
+
     </mat-toolbar-row>
-    
-        
-    
+
+
+
 
 </mat-toolbar>
 
@@ -121,4 +130,6 @@
         <br>
         <br>
     </div>-->
+    
+  <app-alerts></app-alerts>
 </div>
