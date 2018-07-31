@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MovieserviceService } from './movieservice.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material';
+
 @NgModule({
   declarations: [
     AppComponent

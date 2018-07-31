@@ -11,30 +11,36 @@ import { OmdbMovie } from './omdbmovie';
 })
 export class AppComponent {
   movies;
-  omdbmovies;
   omdbMovie;
-  movieTitle = '';
+  omdbSearchTitle = '';
   constructor(private movieService: MovieserviceService) { }
-  movieModel = new Movie("", "", "", "",);
+  movieModel = new Movie("", "", "", "","");
+  
 
+  ngOnInit(){
+    this.defaultLoad();
+  }
   onSubmit(omdbMovie:OmdbMovie) {
     this.movieModel.title=omdbMovie.Title;
     this.movieModel.year=omdbMovie.Year;
-    this.movieModel.imdbId=omdbMovie.Rated;
-    this.movieModel.type=omdbMovie.Genre;
+    this.movieModel.imdbId=omdbMovie.imdbID;
+    this.movieModel.type=omdbMovie.Type;
+    this.movieModel.poster=omdbMovie.Poster;
     this.movieService.saveMovie(this.movieModel).subscribe(res => console.log('Saved'));
+
   }
 
   onClick() {
     this.movieService.getAllMovies().subscribe((data: Movie[]) => { this.movies = data });
-
+    this.omdbMovie=null;
   }
 
   onSearch() {
-    this.movieService.getMovieOmdb(this.movieTitle).subscribe(data => {
+    this.movieService.getMovieOmdb(this.omdbSearchTitle).subscribe(data => {
       this.omdbMovie = data['Search'];
       console.log("Movie data is ",data)
     });
+    this.movies=null;
 
   }
 
@@ -43,4 +49,10 @@ export class AppComponent {
     window.location.reload(true);
   }
 
+  defaultLoad(){
+    this.movieService.defaultLoad().subscribe(data => {
+      this.omdbMovie = data['Search'];
+  });
 }
+}
+  

@@ -1,63 +1,124 @@
 <!--The content below is only a placeholder and can be replaced.-->
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <span>Movie-app</span>
+        <span class="example-spacer" style="margin-left: 250px" >
+                <mat-form-field>
+                        <input matInput value="Search ImDB..." [(ngModel)]="omdbSearchTitle">
+                        <button (click)="onSearch()" mat-raised-button color="accent" style="margin-left: 50px">Search ImDB Movies</button>
+                    </mat-form-field>
+        </span>
+        
+        <mat-icon class="example-icon" [matMenuTriggerFor]="menu">menu</mat-icon>
+       
+        <mat-menu #menu="matMenu">
+            <div (click)="onClick()">
+                <button mat-menu-item>Wishlist</button>
+
+            </div>
+
+            <button mat-menu-item>Sign Out</button>
+        </mat-menu>
+   
+    </mat-toolbar-row>
+    
+        
+    
+
+</mat-toolbar>
+
 <div class="container-fluid">
-  <div align="center">
-      <h1>Movie-app</h1>
 
-      <!--{{ userForm.value | json}}
+    <!--<div align="center">
+        <h1>Movie-app</h1>
+
+        <!--{{ userForm.value | json}}
   <hr />
-  {{ movieModel | json}}-->
-  </div>
-  <div align="center">
-  
-</div>
+  {{ movieModel | json}}
+    </div>-->
+    <!--<div align="center">
+
+    </div>-->
 
 
-  <div align="center" (click)="onClick()">
-      <button class="btn btn-primary" type="submit">Wishlist</button> 
-  </div>
-
-  <br>
-  <br>
-  <div align="center" (click)="onSearch()">
-      <input type="text"  alt="OmDb" name="type" width="48" height="4" [(ngModel)]="movieTitle" placeholder="Search OmDb database">
-      <br>
-      <br>
-      <button class="btn btn-primary" type="search">Search Movie DataBase</button> 
-  </div>
-  <br>
-  <br>
-
-  
-  <br>
-  <br>
-  
-  <div *ngFor="let movie of movies" align="center">
-    <h6>Title   : {{movie.title}}</h6>
-    <h6>Year    : {{movie.year}}</h6>
-    <h6>ImdbId  : {{movie.imdbId}}</h6>
-    <h6>Type    : {{movie.type}}</h6>
-    <img src="data:image/jpeg;base64,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" alt="Smiley face" height="42" width="42">
     <br>
     <br>
-    <div align="center" (click)="onDelete(movie)">
-        <button class="btn btn-primary" type="search">Delete Movie</button> 
+    <!--
+    <div align="center" (click)="onSearch()">
+        <input type="text" alt="OmDb" name="type" width="48" height="4" [(ngModel)]="omdbSearchTitle" placeholder="Search OmDb database">
+        <br>
+        <br>
+        <button mat-raised-button color="primary">Search Movie DataBase</button>
+        <button class="btn btn-primary" type="search">Search Movie DataBase</button>
     </div>
+-->
     <br>
     <br>
-  </div>
 
-  <div *ngFor="let movie of omdbMovie" align="center">
-      <h6>Title     : {{movie.Title}}</h6>
-      <h6>Year      : {{movie.Year}}</h6>
-      <h6>Rated     : {{movie.Rated}}</h6>
-      <h6>Genre     : {{movie.Genre}}</h6>
-     
-    <div align="center" (click)="onSubmit(movie)">
-        <button class="btn btn-primary" type="submit">Save to wishlist</button>
-    </div>
-      
-      <br>
-      <br>
-    </div>
-  
+
+    <mat-grid-list cols="3" rowHeight="100px">
+        <div *ngFor="let movie of movies" align="center">
+            <mat-grid-tile colspan="1" rowspan="6">
+                <mat-card class="example-card">
+                    <mat-card-header>
+                        <div mat-card-avatar class="example-header-image"></div>
+                        <mat-card-title>{{movie.title}}</mat-card-title>
+                        <mat-card-subtitle>{{movie.year}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <img mat-card-image src={{movie.poster}} alt="Movie Poster">
+
+                    <mat-card-actions>
+                        <button mat-raised-button (click)="onDelete(movie)" color="warn">Delete</button>
+                    </mat-card-actions>
+                </mat-card>
+            </mat-grid-tile>
+            <!--
+        <h6>Title : {{movie.title}}</h6>
+        <h6>Year : {{movie.year}}</h6>
+        <h6>ImdbId : {{movie.imdbId}}</h6>
+        <h6>Type : {{movie.type}}</h6>
+        <img src={{movie.poster}} alt="Smiley face" height="200" width="200">
+
+        <br>
+        <br>
+        <div align="center" (click)="onDelete(movie)">
+                <button mat-raised-button color="warn">Delete Movie</button>
+        </div>
+        <br>
+        <br>-->
+        </div>
+
+
+        <div *ngFor="let movie of omdbMovie">
+            <mat-grid-tile colspan="1" rowspan="6">
+                <mat-card class="example-card">
+                    <mat-card-header>
+                        <div mat-card-avatar class="example-header-image"></div>
+                        <mat-card-title>{{movie.Title}}</mat-card-title>
+                        <mat-card-subtitle>{{movie.Year}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <img mat-card-image src={{movie.Poster}} alt="Movie Poster">
+                    <mat-card-actions>
+                        <button mat-raised-button (click)="onSubmit(movie)" color="primary">Move to Wishlist</button>
+                    </mat-card-actions>
+                </mat-card>
+            </mat-grid-tile>
+        </div>
+    </mat-grid-list>
+    <!--
+    <div *ngFor="let movie of omdbMovie" align="center">
+        <h6>Title : {{movie.Title}}</h6>
+        <h6>Year : {{movie.Year}}</h6>
+        <h6>ImdbId : {{movie.imdbID}}</h6>
+        <h6>Type : {{movie.Type}}</h6>
+        <img src={{movie.Poster}} alt="Smiley face" height="200" width="200">
+        <br>
+        <br>
+        <div align="center" (click)="onSubmit(movie)">
+            <button mat-raised-button color="accent">Move to Wishlist</button>
+        </div>
+
+        <br>
+        <br>
+    </div>-->
 </div>
